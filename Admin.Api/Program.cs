@@ -1,11 +1,23 @@
+using Admin.Api.Configurations;
+using Admin.Api.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<MongoDbSettings>(options =>
+{
+    options.ConnectionString = builder.Configuration.GetConnectionString("MongoDb")!;
+    options.DatabaseName = builder.Configuration.GetSection("MongoDbSettings:DatabaseName").Value!;
+    options.CollectionName = builder.Configuration.GetSection("MongoDbSettings:CollectionName").Value!;
+});
+
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 
