@@ -1,4 +1,5 @@
 using Admin.Api.DTOs;
+using Admin.Api.DTOs.User;
 using Admin.Api.Model;
 
 namespace Admin.Api.Services.Interfaces;
